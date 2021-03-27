@@ -1,6 +1,11 @@
 from django.shortcuts import render,redirect
+from .forms import RegistrationForm
 
 # Create your views here.
+def index(request):
+    return render(request,'index.html'),
+
+
 def register(request):
     if request.method=="POST":
         form=RegistrationForm(request.POST)
@@ -16,8 +21,12 @@ def register(request):
         return redirect('login')
     else:
         form= RegistrationForm()
-        prof=profileForm()
+        # prof=profileForm()
     params={
         'form':form,
-        'profForm': prof
+        # 'profForm': prof
     }
+    return render(request, 'users/register.html', params) 
+
+
+

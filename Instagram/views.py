@@ -2,13 +2,13 @@ from django.shortcuts import render,redirect
 from .forms import RegistrationForm
 from django.contrib.auth.decorators import login_required
 from .forms import NewPostForm
+from .models import Image
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 def index(request):
     posts = Image.objects.all()
-    return render(request,'index.html',{"posts":posts,)
-
+    return render(request,'index.html',{"posts":posts,"profile":profile,"comments":comments})
 
 def register(request):
     if request.method=="POST":

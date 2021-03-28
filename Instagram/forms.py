@@ -3,6 +3,12 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
+class  NewPostForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        exclude = ['profile', 'likes','comments']
+
+
 
 class RegistrationForm(UserCreationForm):
     email=forms.EmailField()

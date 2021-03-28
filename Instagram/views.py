@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from .forms import RegistrationForm
 from django.contrib.auth.decorators import login_required
-from .forms import NewPostForm,CommentForm
+from .forms import NewPostForm,CommentForm,ProfileForm
 from .models import Image,Comment
 
 # Create your views here.
@@ -74,6 +74,34 @@ def comment(request,id):
     else:
         form = CommentForm()
     return render(request,'comment.html',{"form":form,"images":images,"comments":comments})
+
+
+@login_required(login_url='/accounts/login/')    
+def profile(request):
+    if request.method == 'POST':
+
+        userForm = UserUpdateForm(request.POST, instance=request.user)
+        profile_form = profileForm(
+            request.POST, request.FILES, instance=request.user)
+
+        if  profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+
+            return redirect('home')
+
+    else:
+        
+        profile_form = profileForm(instance=request.user)
+        user_form = UserUpdateForm(instance=request.user)
+
+        params = {
+            'user_form':user_form,
+            'profile_form': profile_form
+
+        }
+
+    return render(request, 'profile.html', params)
     
 
 

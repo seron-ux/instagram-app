@@ -16,17 +16,16 @@
                 </div>
                 <div class="panel-body">
 
-                    <form method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {% bootstrap_form form %}
-                        {% bootstrap_form profForm %}
-                        <div class="form-group">
-                            <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
-                        </div>
-                        <p>Already have an account? <a href="/login"> Log In</a></p>
-                        <input type="hidden" name="next" value="{{next}}">
-
-                    </form>
+               
+{{form.media}}
+<div class="container">
+    <form action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <br>
+        <input type="submit" class="btn btn-outline-info btn-lg" value="register">
+    </form>
+</div>
 
                 </div>
 
@@ -36,5 +35,7 @@
         <!-- empty div -->
     </div>
 </div>
+
+
 
 {% endblock %}
